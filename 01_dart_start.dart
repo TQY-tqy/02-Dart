@@ -108,12 +108,8 @@ mixin Piloted{
   }
 
 }
-void main(){
-  var result = fibonacci(20);//测试斐波那契函数
-  print('result is $result');
-  //（胖箭头）简写语法用于仅包含一条语句的函数。
-  variables();//输出各变量，测试循环功能
 
+void test_math(){
   //测试math
   double ans = exp(5);
   double ans_1 = max(999,888);
@@ -122,6 +118,11 @@ void main(){
   print('the bigger one of 999 and 888 is $ans_1');
 
   print('test the class Spacecraft');
+
+}
+
+void test_class(){
+  //测试class
   //使用Spacecraft类
   var tqy = Spacecraft('Tang Qingyong', DateTime(2002,10,20));
   tqy.describe();
@@ -137,5 +138,16 @@ void main(){
   var xtjc = PilotedCraft('xtjc', DateTime(2016,4,5));
   xtjc.describe();
   xtjc.describeCrew();
+
+}
+
+void main(){
+  var result = fibonacci(20);//测试斐波那契函数
+  print('result is $result');
+  //（胖箭头）简写语法用于仅包含一条语句的函数。
+  variables();//输出各变量，测试循环功能
+
+  test_math();//测试引入的math包
+  test_class();//测试类
 
 }
