@@ -34,9 +34,6 @@ void dartcore_numbers_numbers_collections_strings_and_more(){
   // Grab a substring.
   assert('Never odd or even'.substring(6, 9) == 'odd');
 
-
-
-
 }
 
 void main(){

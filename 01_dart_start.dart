@@ -141,6 +141,49 @@ void test_class(){
 
 }
 
+Future<void> printWithDelay(String message) async {
+  await Future.delayed(oneSecond);
+  print(message);
+}
+
+Future<void> async_test() async{
+  List<Future<void>> fList = [];
+  for (int i = 0; i < 10; i++) {
+    fList.add(printWithDelay("hello" + i.toString()));
+  }
+  await Future.wait(fList);
+}
+
+Future<void> sync_test() async {
+  for (int i = 0; i < 10; i++) {
+    await printWithDelay("hello" + i.toString());
+  }
+}
+
+void test_exception() {
+  PilotedCraft pilotedCraft = PilotedCraft("Pilot II", DateTime(2022, 3, 1));
+  pilotedCraft.setAstronauts = 0;
+  try {
+    pilotedCraft.describeCrew();
+  } on StateError catch (e) {
+    print("Can not describe object $e");
+  }
+}
+
+Future<void> test_exception2() async {
+  var flybyObjects = ['Jupiter', 'Saturn', 'Uranus', 'Neptune'];
+  try {
+    for (final object in flybyObjects) {
+      var description = await File('$object.txt').readAsString();
+      print(description);
+    }
+  } on IOException catch (e) {
+    print("Could not describe object: $e");
+  } finally {
+    flybyObjects.clear();
+  }
+}
+
 void main(){
   var result = fibonacci(20);//测试斐波那契函数
   print('result is $result');
@@ -150,4 +193,14 @@ void main(){
   test_math();//测试引入的math包
   test_class();//测试类
 
+  print("\n----------同步/异步对比测试------------\n");
+  print("异步操作：\n");
+  timeStamp = DateTime.now().millisecondsSinceEpoch;
+  await async_test();
+  print("异步操作用时：${DateTime.now().millisecondsSinceEpoch - timeStamp}ms\n");
+  print("同步操作：\n");
+  timeStamp = DateTime.now().millisecondsSinceEpoch;
+  await sync_test();
+  print("同步操作用时：${DateTime.now().millisecondsSinceEpoch - timeStamp}ms\n");
+  
 }
