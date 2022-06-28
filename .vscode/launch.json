@@ -5,9 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "DCat",
+            "type": "dart",
+            "request": "launch",
+            "program": "03_dcat.dart",
+            "args": [
+                "-n",
+                "abc.txt"
+            ]
+        },
+        {
             "name": "Dart & Flutter",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "${relativeFile}"
         }
     ]
 }

@@ -15,7 +15,8 @@ Future<void> dcat(List<String> paths, {bool showLineNumbers = false}) async {
       String? line = stdin.readLineSync();
       print('${line}\n');
 
-      if (line?.toLowerCase() == 'exit') {//修改终止条件
+      if (line?.toLowerCase() == 'exit') {
+        //修改终止条件
         print('bye.');
         break;
       }
