@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:io';
 
 //类{https://dart.cn/samples#classes}
 class Spacecraft{
@@ -138,9 +139,11 @@ void test_class(){
   var xtjc = PilotedCraft('xtjc', DateTime(2016,4,5));
   xtjc.describe();
   xtjc.describeCrew();
-
 }
 
+const oneSecond = Duration(seconds: 1);
+
+// 一个会在1秒后输出message的异步测试函数
 Future<void> printWithDelay(String message) async {
   await Future.delayed(oneSecond);
   print(message);
@@ -149,51 +152,30 @@ Future<void> printWithDelay(String message) async {
 Future<void> async_test() async{
   List<Future<void>> fList = [];
   for (int i = 0; i < 10; i++) {
-    fList.add(printWithDelay("hello" + i.toString()));
+    fList.add(printWithDelay("tqy" + i.toString()));
   }
   await Future.wait(fList);
 }
 
 Future<void> sync_test() async {
   for (int i = 0; i < 10; i++) {
-    await printWithDelay("hello" + i.toString());
+    await printWithDelay("qyt" + i.toString());
   }
 }
 
-void test_exception() {
-  PilotedCraft pilotedCraft = PilotedCraft("Pilot II", DateTime(2022, 3, 1));
-  pilotedCraft.setAstronauts = 0;
-  try {
-    pilotedCraft.describeCrew();
-  } on StateError catch (e) {
-    print("Can not describe object $e");
-  }
-}
-
-Future<void> test_exception2() async {
-  var flybyObjects = ['Jupiter', 'Saturn', 'Uranus', 'Neptune'];
-  try {
-    for (final object in flybyObjects) {
-      var description = await File('$object.txt').readAsString();
-      print(description);
-    }
-  } on IOException catch (e) {
-    print("Could not describe object: $e");
-  } finally {
-    flybyObjects.clear();
-  }
-}
-
-void main(){
+void main(List<String> args) async{
   var result = fibonacci(20);//测试斐波那契函数
+  var timeStamp;
+  print("---测试fibonacci数列---\n");
   print('result is $result');
   //（胖箭头）简写语法用于仅包含一条语句的函数。
+  print("---测试循环功能---\n");
   variables();//输出各变量，测试循环功能
-
+  print("---测试math包---\n");
   test_math();//测试引入的math包
+  print("---测试spacecraft类及其子类---\n");
   test_class();//测试类
-
-  print("\n----------同步/异步对比测试------------\n");
+  print("---同步/异步对比测试---\n");
   print("异步操作：\n");
   timeStamp = DateTime.now().millisecondsSinceEpoch;
   await async_test();
@@ -202,5 +184,4 @@ void main(){
   timeStamp = DateTime.now().millisecondsSinceEpoch;
   await sync_test();
   print("同步操作用时：${DateTime.now().millisecondsSinceEpoch - timeStamp}ms\n");
-  
 }
