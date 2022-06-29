@@ -8,16 +8,16 @@ const lineNumber = 'line-number';
 
 Future<void> dcat(List<String> paths, {bool showLineNumbers = false}) async {
   if (paths.isEmpty) {
-    print('type exit to quit.');
+    print('type quit to quit.');
     while (true) {
       stdout.write(
           '>>>'); // 这样可以不换行 https://stackoverflow.com/questions/14073217/print-without-a-newline-in-dart
       String? line = stdin.readLineSync();
       print('${line}\n');
 
-      if (line?.toLowerCase() == 'exit') {
+      if (line?.toLowerCase() == 'quit') {
         //修改终止条件
-        print('bye.');
+        print('Goodbye.');
         break;
       }
     }
